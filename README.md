@@ -142,7 +142,11 @@ Use a custom destination for building the app. Default `""`. For example, `"gene
 
 ### `increment-build-number`
 
-Automatically increment the build number by one before building the application. Default `false`.
+Increment the build number before building the application. Default `""`.
+
+ - `true` - automatically increment the project build number by one
+ - `testflight` - increment the latest TestFlight build number by one
+ - a specific build number e.g. `75`
 
 ## Contributions Welcome!
 

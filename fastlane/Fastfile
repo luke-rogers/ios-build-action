@@ -146,11 +146,20 @@ platform :ios do
     use_build_destination = !ENV['BUILD_DESTINATION'].empty?
     use_cloned_source_packages_path = !ENV['CLONED_SOURCE_PACKAGES_PATH'].empty?
 
-    if ENV['INCREMENT_BUILD_NUMBER'] == 'true'
-      increment_build_number(
-        build_number: latest_testflight_build_number + 1,
-        xcodeproj: ENV['PROJECT_PATH']
-      )
+    if !ENV['INCREMENT_BUILD_NUMBER'].empty?
+      if ENV['INCREMENT_BUILD_NUMBER'] == 'true'
+        increment_build_number(xcodeproj: ENV['PROJECT_PATH'])
+      elsif ENV['INCREMENT_BUILD_NUMBER'] == 'testflight'
+        increment_build_number(
+          build_number: latest_testflight_build_number + 1,
+          xcodeproj: ENV['PROJECT_PATH']
+        )
+      else
+        increment_build_number(
+          build_number: ENV['INCREMENT_BUILD_NUMBER'],
+          xcodeproj: ENV['PROJECT_PATH']
+        )
+      end
     end
 
     if !ENV['INCREMENT_VERSION_NUMBER'].empty?
